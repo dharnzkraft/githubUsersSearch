@@ -1,0 +1,77 @@
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" routerLink="/profile">Back to search</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+    </div>
+  </nav>
+
+  
+
+<div class="container">
+    <div class="d-flex justify-content-center mt-5" *ngIf="isloading">
+        <div class="spinner-grow text-dark" style="width: 200px; height: 200px;" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+    <div class="row">
+        <div class="col-md-5">
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="{{this.userInfo.avatar_url}}" alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title">Name: {{this.userInfo.name}}</h5>
+                  
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <a href="{{this.userInfo.blog}}" class="btn btn-primary">My Blog:</a> {{this.userInfo.blog}}
+                    </li>
+                    <li class="list-group-item">
+                        <button type="button" class="btn btn-success">
+                            Followers <span class="badge badge-light">{{this.userInfo.followers}}</span>
+                          </button>
+                    </li>
+                    <li class="list-group-item">
+                        <button type="button" class="btn btn-info">
+                            Following <span class="badge badge-light">{{this.userInfo.following}}</span>
+                          </button>
+                    </li>
+                    <li class="list-group-item">
+                        <button type="button" class="btn btn-danger">
+                            Public Repos <span class="badge badge-light">{{this.userInfo.public_repos}}</span>
+                          </button>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="{{this.userInfo.html_url}}" class="btn btn-primary">Git Profile </a>{{this.userInfo.html_url}}
+                        
+                    </li>
+                  </ul>
+                </div>
+              </div>
+        </div>
+        <div class="col-md-7">
+            <div class="jumbotron">
+                <strong>Bio:</strong>
+                <p>{{this.userInfo.bio}}</p>
+                <div *ngIf="!this.userInfo.bio">
+                    <p >No Bio informations</p>
+                </div>
+                <br>
+                <strong>Company:</strong>
+                <p>{{this.userInfo.company}}</p>
+                <div *ngIf="!this.userInfo.company">
+                    <p >No Company information</p>
+                </div>
+                <br>
+                <strong>Location:</strong>
+                <p>{{this.userInfo.location}}</p>
+                <div *ngIf="!this.userInfo.location">
+                    <p >No Location information</p>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>

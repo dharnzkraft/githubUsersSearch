@@ -1,0 +1,80 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Github User</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </div>
+</nav>
+
+<div class="container pt-4 searchBox">
+  <input
+    class="form-control me-2"
+    type="search"
+    placeholder="Enter github username"
+    aria-label="Search"
+    [(ngModel)]="username"
+    name="username"
+    (keyup)="searchUser()"
+  />
+</div>
+
+<div class="d-flex justify-content-center mt-5" *ngIf="isloading">
+  <div class="spinner-grow text-dark" style="width: 200px; height: 200px;" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
+
+<div *ngIf="!this.totalCount" style="width: 100%; text-align: center;">
+  <img src="../../../assets/images/searchuser.png">
+</div>
+<div *ngIf="this.totalCount">
+  <div class="container-fluid mt-3">
+    <span class="badge badge-secondary">Total Count :</span>
+    <div class="row totalNum" style="width: 100%; text-align: center;">
+      <div class="col">Total Count: {{ this.totalCount }}</div>
+    </div>
+  </div>
+
+  <div class="container mt-3">
+    <div class="row">
+      <div
+        class="col-3 mb-4"
+        *ngFor="
+          let item of listedUser | paginate: { itemsPerPage: 9, currentPage: p }
+        "
+      >
+        
+        <div class="card" style="width: 18rem" (click)="openUserInfo(item)">
+          <img src="{{ item.avatar_url }}" class="card-img-top" alt="..." />
+          <div class="card-body">
+            <h5 class="card-title">{{ item.login }}</h5>
+            
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <button type="button" class="btn btn-info">
+                View on Github <a href="{{ item.html_url }}"> Here</a>
+              </button>
+            </li>
+          </ul>
+        </div>
+       
+      </div>
+    </div>
+
+    <div class="container" style="width: 100%; text-align: center;">
+      <!-- ngx pagination plugin control -->
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    
+    </div>
+  </div>
+</div>
